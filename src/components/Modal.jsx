@@ -4,7 +4,6 @@ import Input from './ui/input'
 
 const Modal = ({setError, error, edit}) => {
     const [inputValue, setInputValue] = useState(edit?.pathname || '');
-    console.log("edit obj", edit)
 
     const handleChange = (event) => {
         console.log('Input value:', event.target.value);
@@ -18,7 +17,7 @@ const Modal = ({setError, error, edit}) => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ pathname: inputValue }), 
+            body: JSON.stringify({ ...edit, pathname: inputValue }), 
           });
           const data = await response.json();
           console.log('put request response:', data);
