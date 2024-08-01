@@ -12,6 +12,7 @@ import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
+import { Skeleton } from "./Skeleton";
   
 export function BlobsTable({data, setBlob, fetchBlobs, loading}) {
     const [modal, setModal] = useState(null);
