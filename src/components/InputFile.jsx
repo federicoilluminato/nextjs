@@ -21,6 +21,7 @@ export default function InputFile() {
         const data = await response.json();
         console.log("response getblobs", data)
         setBlob(data);
+        localStorage.setItem('blobData', data);
     };
 
     const handleSubmit = async (event) => {

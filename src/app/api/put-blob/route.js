@@ -12,7 +12,7 @@ export async function PUT(request) {
         });
     }
     catch(error){
-        return new Response(JSON.stringify({ error: 'Failed to update blob' }), {
+        return new Response(JSON.stringify({ error: error }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
