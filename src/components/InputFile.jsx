@@ -10,6 +10,8 @@ export default function InputFile() {
     const inputFileRef = useRef(null);
     const [blob, setBlob] = useState(null);
     const [error, setError] = useState(null); 
+    const [loading, setLoading] = useState(false); 
+
 
     const fetchBlobs = async () => {
         const response = await fetch('/api/get-blobs');
@@ -23,6 +25,7 @@ export default function InputFile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true)
         if (!inputFileRef.current.files[0]) {
             setError('No file selected');
             return;
@@ -45,6 +48,7 @@ export default function InputFile() {
             console.error('Upload error:', uploadError);
         } finally {
             fetchBlobs()
+            setLoading(false)
         }
     };
 
@@ -58,7 +62,7 @@ export default function InputFile() {
                 <Modal setError={setError} error={error}/>
             )}
             {blob?.length > 0 && (
-                <BlobsTable data={blob} setBlob={setBlob} fetchBlobs={fetchBlobs}/>
+                <BlobsTable data={blob} setBlob={setBlob} fetchBlobs={fetchBlobs} loading={loading}/>
             )}
         </>
     );

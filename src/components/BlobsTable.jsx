@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
   
-export function BlobsTable({data, setBlob, fetchBlobs}) {
+export function BlobsTable({data, setBlob, fetchBlobs, loading}) {
     const [modal, setModal] = useState(null);
     const [edit, setEdit] = useState(null);
 
@@ -38,26 +38,44 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
     }
 
     return (
-    <>
-      <Table>
-        <TableCaption>A list of your recent uploaded files.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="">Blob</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data?.map((data, i) => (
-            <TableRow key={i}>
-              <TableCell className="font-medium"><a href={data.downloadUrl} target="_blank" rel="noopener noreferrer">{data.pathname}</a></TableCell>
-              <TableCell><Button variant="destructive" onClick={()=>handleDelete(data.downloadUrl)}><FaTrash/></Button></TableCell>
-              <TableCell><Button onClick={()=>handleEdit(data)}><FaPen/></Button></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      {modal && (<Modal setError={setModal} error={modal} edit={edit}/>)}
-      </>
-    )
+        <>
+            {loading ? (
+                <Skeleton />
+            ) : (
+                <>
+                    <Table>
+                        <TableCaption>A list of your recent uploaded files.</TableCaption>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className="">Blob</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {data?.map((item, i) => (
+                                <TableRow key={i}>
+                                    <TableCell className="font-medium">
+                                        <a href={item.downloadUrl} target="_blank" rel="noopener noreferrer">
+                                            {item.pathname}
+                                        </a>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button variant="destructive" onClick={() => handleDelete(item.downloadUrl)}>
+                                            <FaTrash />
+                                        </Button>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button onClick={() => handleEdit(item)}>
+                                            <FaPen />
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    {modal && <Modal setError={setModal} error={modal} edit={edit} />}
+                </>
+            )}
+        </>
+    );
   }
   
