@@ -12,9 +12,8 @@ import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import Modal from "./Modal";
-import { SkeletonList } from "./SkeletonList";
   
-export function BlobsTable({data, setBlob, fetchBlobs, loading}) {
+export function BlobsTable({data, setBlob, fetchBlobs }) {
     const [modal, setModal] = useState(null);
     const [edit, setEdit] = useState(null);
 
@@ -40,43 +39,37 @@ export function BlobsTable({data, setBlob, fetchBlobs, loading}) {
 
     return (
         <>
-            {loading ? (
-                <SkeletonList />
-            ) : (
-                <>
-                    <Table>
-                        <TableCaption>A list of your recent uploaded files.</TableCaption>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="">Blob</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {data?.map((item, i) => (
-                                <TableRow key={i}>
-                                    <TableCell className="font-medium">
-                                        <a href={item.downloadUrl} target="_blank" rel="noopener noreferrer">
-                                            {item.pathname}
-                                        </a>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button variant="destructive" onClick={() => handleDelete(item.downloadUrl)}>
-                                            <FaTrash />
-                                        </Button>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button onClick={() => handleEdit(item)}>
-                                            <FaPen />
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    {modal && <Modal setError={setModal} error={modal} edit={edit} />}
-                </>
-            )}
-        </>
+        <Table>
+            <TableCaption>A list of your recent uploaded files.</TableCaption>
+            <TableHeader>
+                <TableRow>
+                    <TableHead className="">Blob</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {data?.map((item, i) => (
+                    <TableRow key={i}>
+                        <TableCell className="font-medium">
+                            <a href={item.downloadUrl} target="_blank" rel="noopener noreferrer">
+                                {item.pathname}
+                            </a>
+                        </TableCell>
+                        <TableCell>
+                            <Button variant="destructive" onClick={() => handleDelete(item.downloadUrl)}>
+                                <FaTrash />
+                            </Button>
+                        </TableCell>
+                        <TableCell>
+                            <Button onClick={() => handleEdit(item)}>
+                                <FaPen />
+                            </Button>
+                        </TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+        {modal && <Modal setError={setModal} error={modal} edit={edit} />}
+    </>
     );
   }
   

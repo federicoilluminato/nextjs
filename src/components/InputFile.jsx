@@ -6,6 +6,7 @@ import { upload } from '@vercel/blob/client';
 import { BlobsTable } from "./BlobsTable";
 import Modal from "./Modal";
 import { Button } from "./ui/button";
+import { SkeletonList } from "./SkeletonList";
 
 export default function InputFile() {
     const inputFileRef = useRef(null);
@@ -69,8 +70,12 @@ export default function InputFile() {
             {error && (             
                 <Modal setError={setError} error={error}/>
             )}
-            {blob?.length > 0 && (
-                <BlobsTable data={blob} setBlob={setBlob} fetchBlobs={fetchBlobs} loading={loading}/>
+            {loading ? (
+                <SkeletonList />
+            ) : (
+                blob?.length > 0 && (
+                    <BlobsTable data={blob} setBlob={setBlob} fetchBlobs={fetchBlobs} loading={loading} />
+                )
             )}
         </>
     );

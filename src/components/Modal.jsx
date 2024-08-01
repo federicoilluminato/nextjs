@@ -19,6 +19,7 @@ const Modal = ({setError, error, edit}) => {
             },
             body: JSON.stringify({ ...edit, pathname: inputValue }), 
           });
+          console.log('uploading this', { ...edit, pathname: inputValue })
           const data = await response.json();
           console.log('put request response:', data);
         } catch (error) {
