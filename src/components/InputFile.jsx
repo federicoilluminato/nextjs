@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import Input from "./ui/input";
 import { upload } from '@vercel/blob/client';
-import { Table } from "./ui/table";
 import { BlobsTable } from "./BlobsTable";
 
 export default function InputFile() {
@@ -59,7 +58,7 @@ export default function InputFile() {
             </div>
             )}
             {blob && (
-                <BlobsTable invoices={blob}/>
+                <BlobsTable data={blob}/>
             )}
         </>
     );
