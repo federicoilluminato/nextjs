@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import Input from "./ui/input";
 import { upload } from '@vercel/blob/client';
+import { Table } from "./ui/table";
+import { BlobsTable } from "./BlobsTable";
 
 export default function InputFile() {
     const inputFileRef = useRef(null);
@@ -27,7 +29,6 @@ export default function InputFile() {
                 access: 'public',
                 handleUploadUrl: '/api/upload',
             });
-            setBlob(newBlob);
             setError(null); 
         } catch (uploadError) {
             setError('Upload failed');
@@ -39,6 +40,7 @@ export default function InputFile() {
             }
             const data = await response.json();
             console.log("response getblobs", data)
+            setBlob(data);
         }
     };
 
@@ -57,9 +59,8 @@ export default function InputFile() {
             </div>
             )}
             {blob && (
-                <div>
-                    Blob url: <a href={blob.url}>{blob.url}</a>
-                </div>
+                <BlobsTable invoices={blob}/>
+                // aca hay que iterar sobre los blobs, y por cada uno hacer un componente, con los botones que piden, quizas tengan que ser del lado del servidor
             )}
         </>
     );
