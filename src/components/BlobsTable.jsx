@@ -10,7 +10,7 @@ import {
   } from "@/components/ui/table"
 import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "./Modal";
 import { SkeletonList } from "./SkeletonList";
   

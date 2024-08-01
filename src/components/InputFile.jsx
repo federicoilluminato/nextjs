@@ -5,6 +5,7 @@ import Input from "./ui/input";
 import { upload } from '@vercel/blob/client';
 import { BlobsTable } from "./BlobsTable";
 import Modal from "./Modal";
+import { Button } from "./ui/button";
 
 export default function InputFile() {
     const inputFileRef = useRef(null);
@@ -21,7 +22,7 @@ export default function InputFile() {
         const data = await response.json();
         console.log("response getblobs", data)
         setBlob(data);
-        localStorage.setItem('blobData', data);
+        localStorage.setItem('blobData', JSON.stringify(data));
     };
 
     const handleSubmit = async (event) => {
@@ -55,9 +56,9 @@ export default function InputFile() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex flex-col">
                 <Input type="file" ref={inputFileRef} />
-                <button type="submit" className="justify-self-center">Upload</button>
+                <Button type="submit" className="justify-self-center">Upload</Button>
             </form>
             {error && (             
                 <Modal setError={setError} error={error}/>
