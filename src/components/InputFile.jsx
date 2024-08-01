@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "./ui/input";
 import { upload } from '@vercel/blob/client';
 import { BlobsTable } from "./BlobsTable";
@@ -54,6 +54,12 @@ export default function InputFile() {
         }
     };
 
+    useEffect(() => {
+        const storedBlobData = localStorage.getItem('blobData');
+        if (storedBlobData) {
+            setBlob(JSON.parse(storedBlobData));
+        }
+    }, []);
     return (
         <>
             <form onSubmit={handleSubmit} className="flex flex-col">
