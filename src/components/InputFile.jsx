@@ -47,7 +47,7 @@ export default function InputFile() {
         <>
             <form onSubmit={handleSubmit}>
                 <Input type="file" ref={inputFileRef} />
-                <button type="submit">Upload</button>
+                <button type="submit" className="justify-self-center">Upload</button>
             </form>
             {error && (             
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

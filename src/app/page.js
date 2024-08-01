@@ -4,7 +4,9 @@ const Page = () => {
   return (
     <>
     <div className="grid w-full items-center gap-1.5">
-      <InputFile/>
+      <div className="w-auto flex justify-center py-4 m-5">
+        <InputFile/>
+      </div>
     </div>
     </>
   )
