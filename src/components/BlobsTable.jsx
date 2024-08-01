@@ -23,7 +23,7 @@ export function BlobsTable({data}) {
             const data = await response.json();
             console.log('delete response', data)
         }catch(error){
-            setModal(`error getblobs: ${response.status}`);
+            setModal(`error getblobs: ${error}`);
         }
     }
 
@@ -39,7 +39,7 @@ export function BlobsTable({data}) {
           {data.map((data, i) => (
             <TableRow key={i}>
               <TableCell className="font-medium"><a href={data.downloadUrl} target="_blank" rel="noopener noreferrer">{data.downloadUrl}</a></TableCell>
-              <TableCell><Button variant="destructive" onClick={()=>handleDelete(data.downlaodUrl)}><FaTrash/></Button></TableCell>
+              <TableCell><Button variant="destructive" onClick={()=>handleDelete(data.downloadUrl)}><FaTrash/></Button></TableCell>
               <TableCell><Button><FaPen/></Button></TableCell>
             </TableRow>
           ))}
