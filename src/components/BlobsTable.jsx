@@ -11,6 +11,7 @@ import {
 import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
+import Modal from "./Modal";
   
 export function BlobsTable({data, setBlob, fetchBlobs}) {
     const [modal, setModal] = useState(null); 
@@ -30,9 +31,8 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
         }
     }
 
-    
-
     return (
+    <>
       <Table>
         <TableCaption>A list of your recent uploaded files.</TableCaption>
         <TableHeader>
@@ -41,7 +41,7 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((data, i) => (
+          {data?.map((data, i) => (
             <TableRow key={i}>
               <TableCell className="font-medium"><a href={data.downloadUrl} target="_blank" rel="noopener noreferrer">{data.downloadUrl}</a></TableCell>
               <TableCell><Button variant="destructive" onClick={()=>handleDelete(data.downloadUrl)}><FaTrash/></Button></TableCell>
@@ -50,6 +50,8 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
           ))}
         </TableBody>
       </Table>
+      {modal && (<Modal setError={setModal} error={modal}/>)}
+      </>
     )
   }
   
