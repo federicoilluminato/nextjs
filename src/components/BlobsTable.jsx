@@ -11,7 +11,7 @@ import {
 import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
   
-export function BlobsTable(data) {
+export function BlobsTable({data}) {
 
     return (
       <Table>
