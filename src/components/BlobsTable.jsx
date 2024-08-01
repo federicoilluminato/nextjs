@@ -41,7 +41,7 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {blobs.map((data, i) => (
+          {data.map((data, i) => (
             <TableRow key={i}>
               <TableCell className="font-medium"><a href={data.downloadUrl} target="_blank" rel="noopener noreferrer">{data.downloadUrl}</a></TableCell>
               <TableCell><Button variant="destructive" onClick={()=>handleDelete(data.downloadUrl)}><FaTrash/></Button></TableCell>
