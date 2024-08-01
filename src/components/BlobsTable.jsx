@@ -30,6 +30,7 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
             setModal(`error getblobs: ${error}`);
         }
     }
+
     
 
     return (
@@ -37,7 +38,7 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
         <TableCaption>A list of your recent uploaded files.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-full">Blob</TableHead>
+            <TableHead className="">Blob</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
