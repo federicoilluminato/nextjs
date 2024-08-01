@@ -57,7 +57,7 @@ export default function InputFile() {
             {error && (             
                 <Modal setError={setError} error={error}/>
             )}
-            {blob && (
+            {blob?.length > 0 && (
                 <BlobsTable data={blob} setBlob={setBlob} fetchBlobs={fetchBlobs}/>
             )}
         </>
