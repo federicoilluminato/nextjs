@@ -33,7 +33,7 @@ export default function InputFile() {
             setError('Upload failed');
             console.error('Upload error:', uploadError);
         } finally {
-            const response = await fetch('/api/list-files');
+            const response = await fetch('/api/get-blobs');
             if (!response.ok) {
                 setError(`error getblobs: ${response.status}`);
             }
