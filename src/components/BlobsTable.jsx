@@ -14,7 +14,8 @@ import { useState, useEffect } from "react";
 import Modal from "./Modal";
   
 export function BlobsTable({data, setBlob, fetchBlobs}) {
-    const [modal, setModal] = useState(null); 
+    const [modal, setModal] = useState(null);
+    const [edit, setEdit] = useState(null);
 
     const handleDelete = async (url) =>{
         try{
@@ -31,6 +32,11 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
         }
     }
 
+    const handleEdit = (data) =>{
+        setModal(true)
+        setEdit(data)
+    }
+
     return (
     <>
       <Table>
@@ -45,12 +51,12 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
             <TableRow key={i}>
               <TableCell className="font-medium"><a href={data.downloadUrl} target="_blank" rel="noopener noreferrer">{data.downloadUrl}</a></TableCell>
               <TableCell><Button variant="destructive" onClick={()=>handleDelete(data.downloadUrl)}><FaTrash/></Button></TableCell>
-              <TableCell><Button><FaPen/></Button></TableCell>
+              <TableCell><Button onClick={()=>handleEdit(data)}><FaPen/></Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      {modal && (<Modal setError={setModal} error={modal}/>)}
+      {modal && (<Modal setError={setModal} error={modal} edit={edit}/>)}
       </>
     )
   }
