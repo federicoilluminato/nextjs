@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Input from './ui/input'
 
 const Modal = ({setError, error, edit}) => {
-    const [inputValue, setInputValue] = useState(edit || '');
+    const [inputValue, setInputValue] = useState(edit.pathname || '');
     console.log("edit obj", edit)
 
     const handleChange = (event) => {
