@@ -23,8 +23,7 @@ export function BlobsTable({data, setBlob, fetchBlobs}) {
             const result = await response.json();
             console.log('delete response', result)
             if (result.success) {
-                const updatedBlobs = await fetchBlobs();
-                setBlob(updatedBlobs);
+                fetchBlobs();
             }
         }catch(error){
             setModal(`error getblobs: ${error}`);
