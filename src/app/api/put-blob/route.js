@@ -5,7 +5,8 @@ export async function PUT(request) {
         const form = await request.formData();
         const file = form.get('file');
         const blob = await put(file.name, file, { access: 'public' });
-        return new Response(JSON.stringify({ success: true }), {
+        console.log('blob', blob)
+        return new Response(JSON.stringify({ success: true, blob }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
