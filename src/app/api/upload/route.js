@@ -9,9 +9,11 @@ export async function POST(request) {
         body,
         request,
         onBeforeGenerateToken: async (pathname) => {
-          // Notify third-party API that upload is starting
+        // Notify third-party API that upload is starting
+        // Generate a client token for the browser to upload the file
+        // ⚠️ Authenticate and authorize users before generating the token.
+        // Otherwise, you're allowing anonymous uploads.
           try {
-            // Notify third-party API about successful upload
             await fetch('https://example.com/upload-starting', {
               method: 'POST',
               body: JSON.stringify({ blobUrl: blob.url }),
