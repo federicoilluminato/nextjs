@@ -24,7 +24,7 @@ export function BlobsTable({data}) {
         <TableBody>
           {data.map((data, i) => (
             <TableRow key={i}>
-              <TableCell className="font-medium">{data.downloadUrl}</TableCell>
+              <TableCell className="font-medium"><a href={data.downloadUrl} target="_blank" rel="noopener noreferrer">{data.downloadUrl}</a></TableCell>
               <TableCell><Button><FaTrash/></Button></TableCell>
               <TableCell><Button><FaPen/></Button></TableCell>
             </TableRow>
