@@ -10,6 +10,16 @@ export default function InputFile() {
     const [blob, setBlob] = useState(null);
     const [error, setError] = useState(null); 
 
+    const fetchBlobs = async () => {
+        const response = await fetch('/api/get-blobs');
+        if (!response.ok) {
+            setError(`error getblobs: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("response getblobs", data)
+        setBlob(data);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!inputFileRef.current.files[0]) {
@@ -33,13 +43,7 @@ export default function InputFile() {
             setError('Upload failed');
             console.error('Upload error:', uploadError);
         } finally {
-            const response = await fetch('/api/get-blobs');
-            if (!response.ok) {
-                setError(`error getblobs: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log("response getblobs", data)
-            setBlob(data);
+            fetchBlobs()
         }
     };
 
@@ -58,7 +62,7 @@ export default function InputFile() {
             </div>
             )}
             {blob && (
-                <BlobsTable data={blob}/>
+                <BlobsTable data={blob} setBlob={setBlob} fetchBlobs={fetchBlobs}/>
             )}
         </>
     );

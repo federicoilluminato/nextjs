@@ -10,9 +10,9 @@ import {
   } from "@/components/ui/table"
 import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
   
-export function BlobsTable({data}) {
+export function BlobsTable({data, setBlob, fetchBlobs}) {
     const [modal, setModal] = useState(null); 
 
     const handleDelete = async (url) =>{
@@ -20,12 +20,17 @@ export function BlobsTable({data}) {
             const response = await fetch('api/delete-blob?url='+encodeURIComponent(url),{
                 method: 'DELETE'
             });
-            const data = await response.json();
-            console.log('delete response', data)
+            const result = await response.json();
+            console.log('delete response', result)
+            if (result.success) {
+                const updatedBlobs = await fetchBlobs();
+                setBlob(updatedBlobs);
+            }
         }catch(error){
             setModal(`error getblobs: ${error}`);
         }
     }
+    
 
     return (
       <Table>
@@ -36,7 +41,7 @@ export function BlobsTable({data}) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((data, i) => (
+          {blobs.map((data, i) => (
             <TableRow key={i}>
               <TableCell className="font-medium"><a href={data.downloadUrl} target="_blank" rel="noopener noreferrer">{data.downloadUrl}</a></TableCell>
               <TableCell><Button variant="destructive" onClick={()=>handleDelete(data.downloadUrl)}><FaTrash/></Button></TableCell>
