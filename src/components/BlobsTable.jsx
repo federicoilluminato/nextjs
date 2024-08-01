@@ -12,7 +12,7 @@ import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
-import { Skeleton } from "./Skeleton";
+import { SkeletonList } from "./SkeletonList";
   
 export function BlobsTable({data, setBlob, fetchBlobs, loading}) {
     const [modal, setModal] = useState(null);
@@ -41,7 +41,7 @@ export function BlobsTable({data, setBlob, fetchBlobs, loading}) {
     return (
         <>
             {loading ? (
-                <Skeleton />
+                <SkeletonList />
             ) : (
                 <>
                     <Table>
