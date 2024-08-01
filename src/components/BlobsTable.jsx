@@ -1,3 +1,4 @@
+'use client';
 import {
     Table,
     TableBody,
@@ -10,8 +11,7 @@ import {
 import { FaPen, FaTrash} from "react-icons/fa";
 import { Button } from "./ui/button";
   
-export function BlobsTable() {
-    let invoices = [{},{}]
+export function BlobsTable(data) {
 
     return (
       <Table>
@@ -22,9 +22,9 @@ export function BlobsTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice, i) => (
+          {data.map((data, i) => (
             <TableRow key={i}>
-              <TableCell className="font-medium">{'link'}</TableCell>
+              <TableCell className="font-medium">{data.downloadUrl}</TableCell>
               <TableCell><Button><FaTrash/></Button></TableCell>
               <TableCell><Button><FaPen/></Button></TableCell>
             </TableRow>

@@ -60,7 +60,6 @@ export default function InputFile() {
             )}
             {blob && (
                 <BlobsTable invoices={blob}/>
-                // aca hay que iterar sobre los blobs, y por cada uno hacer un componente, con los botones que piden, quizas tengan que ser del lado del servidor
             )}
         </>
     );
