@@ -12,7 +12,7 @@ const Modal = ({setError, error, edit}) => {
 
     const handleSave = async () => {
         try {
-          const response = await fetch('/api/edit-item', { 
+          const response = await fetch('/api/put-blob', { 
             method: 'PUT', 
             headers: {
               'Content-Type': 'application/json',
