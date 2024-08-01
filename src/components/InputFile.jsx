@@ -14,7 +14,7 @@ export default function InputFile() {
         if (!inputFileRef.current.files[0]) {
             setError('No file selected');
             return;
-        }
+        }   
         const file = inputFileRef.current.files[0];
         console.log("file size", (file.size / (1024 * 1024)).toFixed(2), "mb")
 
